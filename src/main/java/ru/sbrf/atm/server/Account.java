@@ -16,4 +16,8 @@ public class Account {
   public long getAmount() {
     return amount;
   }
+
+  public void addAmount(long value) {
+    amount += value;
+  }
 }
