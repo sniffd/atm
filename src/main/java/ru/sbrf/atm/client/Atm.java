@@ -14,7 +14,7 @@ public class Atm {
   }
 
   public long getBalance(Currency currency) {
-    return client.getAccount(currency).getAmount();
+    return client.getAccount(currency).getBalance();
   }
 
   public void addMoney(long value, Currency currency) {
