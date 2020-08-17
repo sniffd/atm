@@ -13,11 +13,11 @@ public class Atm {
     this.client = client;
   }
 
-  public long getBalance(Currency currency) {
-    return client.getAccount(currency).getBalance();
+  public long getBalance(Card card) {
+    return client.getAccount(card).getBalance();
   }
 
-  public void addMoney(long value, Currency currency) {
-    client.getAccount(currency).addAmount(value);
+  public void addMoney(long value, Card card) {
+    client.getAccount(card).addAmount(value);
   }
 }
