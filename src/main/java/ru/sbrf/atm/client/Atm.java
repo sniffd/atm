@@ -2,7 +2,6 @@ package ru.sbrf.atm.client;
 
 import ru.sbrf.atm.server.Bank;
 import ru.sbrf.atm.server.Client;
-import ru.sbrf.atm.server.Currency;
 
 public class Atm {
   private Bank bank;
@@ -13,11 +12,11 @@ public class Atm {
     this.client = client;
   }
 
-  public long getBalance(Card card) {
+  public long getBalance(CardKey card) {
     return client.getAccount(card).getBalance();
   }
 
-  public void addMoney(long value, Card card) {
+  public void addMoney(long value, CardKey card) {
     client.getAccount(card).addAmount(value);
   }
 }
