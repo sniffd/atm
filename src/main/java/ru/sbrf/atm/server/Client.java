@@ -2,27 +2,28 @@ package ru.sbrf.atm.server;
 
 import java.util.HashMap;
 import java.util.Map;
+import ru.sbrf.atm.client.CardKey;
 
 public class Client {
   private String name;
   private long id;
-  private Map<Currency, Account> accounts;
+  private Map<CardKey, Account> accounts;
 
   public Client(String name, long id) {
     this.name = name;
     this.id = id;
-    this.accounts = new HashMap<Currency, Account>();
+    this.accounts = new HashMap<CardKey, Account>();
   }
 
-  public Map<Currency, Account> getAccounts() {
+  public Map<CardKey, Account> getAccounts() {
     return accounts;
   }
 
-  public void addAccount(Account account) {
-    accounts.put(account.getCurrency(), account);
+  public void addAccount(CardKey card, Account account) {
+    accounts.put(card, account);
   }
 
-  public Account getAccount(Currency currency) {
-    return accounts.get(currency);
+  public Account getAccount(CardKey card) {
+    return accounts.get(card);
   }
 }
