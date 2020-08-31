@@ -1,29 +1,48 @@
 package ru.sbrf.atm.server;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import ru.sbrf.atm.client.CardKey;
+import java.util.Optional;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import ru.sbrf.atm.client.auth.Key;
+import ru.sbrf.atm.server.exceptions.AccountAlreadyExistException;
+import ru.sbrf.atm.server.exceptions.AccountNotFoundException;
 
+@Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
+@EqualsAndHashCode
 public class Client {
+
+  @Getter
+  @NonNull
   private String name;
-  private long id;
-  private Map<CardKey, Account> accounts;
+  @Getter
+  @NonNull
+  private String id;
+  @Builder.Default
+  private Map<Key, Account> accounts = new HashMap<>();
 
-  public Client(String name, long id) {
-    this.name = name;
-    this.id = id;
-    this.accounts = new HashMap<CardKey, Account>();
+
+  public void addAccount(Key key, Account account) {
+    if (accounts.containsKey(key)) {
+      throw new AccountAlreadyExistException("Счет с таким ключом уже существует");
+    }
+    accounts.put(key, account);
   }
 
-  public Map<CardKey, Account> getAccounts() {
-    return accounts;
+  public Account getAccount(Key key) {
+    Optional<Account> account = Optional.ofNullable(accounts.get(key));
+    return account.orElseThrow(AccountNotFoundException::new);
   }
 
-  public void addAccount(CardKey card, Account account) {
-    accounts.put(card, account);
-  }
-
-  public Account getAccount(CardKey card) {
-    return accounts.get(card);
+  public Map<Key, Account> getAccounts() {
+    return Collections.unmodifiableMap(accounts);
   }
 }

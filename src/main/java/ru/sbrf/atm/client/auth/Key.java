@@ -1,4 +1,4 @@
-package ru.sbrf.atm.client;
+package ru.sbrf.atm.client.auth;
 
 public interface Key {
   String getKeyString();
