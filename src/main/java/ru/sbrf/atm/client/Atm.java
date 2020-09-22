@@ -1,22 +1,23 @@
 package ru.sbrf.atm.client;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import ru.sbrf.atm.client.auth.Key;
 import ru.sbrf.atm.server.Bank;
-import ru.sbrf.atm.server.Client;
 
+@Setter
+@Getter
+@AllArgsConstructor
 public class Atm {
+
   private Bank bank;
-  private Client client;
 
-  public Atm(Bank bank, Client client) {
-    this.bank = bank;
-    this.client = client;
+  public long getBalance(Key key) {
+    return bank.getClient(key.getKeyString()).getAccount(key).getBalance();
   }
 
-  public long getBalance(CardKey card) {
-    return client.getAccount(card).getBalance();
-  }
-
-  public void addMoney(long value, CardKey card) {
-    client.getAccount(card).addAmount(value);
+  public void addMoney(long value, Key key) {
+    bank.getClient(key.getKeyString()).getAccount(key).changeBalance(value);
   }
 }
