@@ -1,15 +1,18 @@
 package ru.sbrf.atm.server.model;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import ru.sbrf.atm.server.entity.AccountEntity;
+import lombok.Data;
 
+@Data
 @Builder
+@AllArgsConstructor
 public class ClientDto {
 
   private String id;
 
   private String name;
 
-  private List<AccountEntity> accounts;
+  private List<AccountDto> accounts;
 }

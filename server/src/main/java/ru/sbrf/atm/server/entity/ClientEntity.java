@@ -1,6 +1,7 @@
 package ru.sbrf.atm.server.entity;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -34,6 +35,6 @@ public class ClientEntity extends AbstractPersistable<String> {
     return ClientDto.builder()
         .id(getId())
         .name(name)
-        .accounts(accounts).build();
+        .accounts(accounts.stream().map(AccountEntity::toDto).collect(Collectors.toList())).build();
   }
 }

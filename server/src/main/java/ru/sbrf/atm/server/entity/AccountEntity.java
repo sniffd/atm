@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import ru.sbrf.atm.server.Currency;
+import ru.sbrf.atm.server.model.AccountDto;
 
 @Entity
 @Table(name = "accounts")
@@ -30,5 +31,13 @@ public class AccountEntity extends AbstractPersistable<String> {
     this.currency = currency;
     this.balance = balance;
     this.owner = owner;
+  }
+
+  public AccountDto toDto() {
+    return AccountDto.builder()
+        .id(getId())
+        .currency(currency)
+        .balance(balance)
+        .owner(owner.toDto()).build();
   }
 }
