@@ -21,7 +21,7 @@ public class Controller {
 //  }
 
   @GetMapping("/clients/{clientId}")
-  public ResponseEntity<ClientDto> getBalance(@PathVariable String clientId) {
+  public ResponseEntity<ClientDto> getClient(@PathVariable String clientId) {
     return new ResponseEntity<>(clientService.getClient(clientId), HttpStatus.OK);
   }
 
